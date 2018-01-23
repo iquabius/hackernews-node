@@ -6,4 +6,18 @@ type Query {
 
 type Mutation {
   post(url: String!, description: String!): Link!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+# We don't import the User type from prisma.graphql to NOT expose the password
+# field through the application schema
+type User {
+  id: ID!
+  name: String!
+  email: String!
 }
